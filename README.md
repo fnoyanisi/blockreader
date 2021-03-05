@@ -6,7 +6,7 @@ An input of the form
 ```
 { int x; char y; { bool y; x; y;} x; y;}
 ```
-converted into
+is converted into
 ```
 {{x:int; y:bool; } x:int; y:char; }
 ```
