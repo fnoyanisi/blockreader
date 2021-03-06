@@ -29,14 +29,14 @@
 #include <unordered_map>
 #include "Symbol.h"
 
-class Env {
+class Environment {
         private:
-                std::unordered_map<std::string, Sym> table;
-                Env *prev;
+                std::unordered_map<std::string, Symbol> table;
+                Environment *prev;
         public:
-                Env(Env* p): prev(p) {}
-                void put(std::string, Sym);
-                Sym get(std::string);
+                Environment(Environment* p): prev(p) {}
+                void put(std::string, Symbol);
+                Symbol get(std::string);
 };
 
 #endif

@@ -27,7 +27,7 @@
 #ifndef _SYMBOL_H_
 #define _SYMBOL_H_
 
-class Sym {
+class Symbol {
 
 };
 
