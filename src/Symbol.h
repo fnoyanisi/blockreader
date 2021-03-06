@@ -23,12 +23,17 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #ifndef _SYMBOL_H_
 #define _SYMBOL_H_
 
-class Symbol {
+#include "Type.h"
 
+// The Smbol class can be extended to accomodate
+// more information about each symbol
+class Symbol {
+        public:
+                Type type;
+                Symbol(Type t):type(t) {}
 };
 
 #endif

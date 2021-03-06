@@ -28,6 +28,7 @@
 
 #include <unordered_map>
 #include "Symbol.h"
+#include "Type.h"
 
 class Environment {
         private:
