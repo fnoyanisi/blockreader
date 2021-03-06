@@ -24,8 +24,8 @@
  */
 
 
-#ifndef _SYM_H_
-#define _SYM_H_
+#ifndef _SYMBOL_H_
+#define _SYMBOL_H_
 
 class Sym {
 

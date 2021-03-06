@@ -23,11 +23,11 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _ENV_H_
-#define _ENV_H_
+#ifndef _ENVIRONMENT_H_
+#define _ENVIRONMENT_H_
 
 #include <unordered_map>
-#include "Sym.h"
+#include "Symbol.h"
 
 class Env {
         private:

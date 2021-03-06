@@ -1,7 +1,8 @@
 project(blockreader_source)
 
 set(BLOCKREADER_SRC
-        Env.cc Env.h
+        Environment.cc Environment.h
+        Symbol.cc Symbol.h
         Main.cc)
 
 add_executable(blockreader ${BLOCKREADER_SRC})
