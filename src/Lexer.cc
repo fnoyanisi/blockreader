@@ -25,13 +25,19 @@
 
 #include "Type.h"
 #include "Lexer.h"
+#include "Exception.h"
 
 std::vector<Token> Lexer::scan() {
+        unsigned line_number = 1;
+
         while((lookahead = is.get())) {
                 // skip whitespaces     
-                while (std::isspace(lookahead))
+                while (std::isspace(lookahead)) {
+                        if (lookahead == '\n')
+                                line_number++;
                         continue;
-                
+                }
+        
                 if (lookahead == '{') {
                         tokens.push_back(Token(TokenType::LeftP, "}"));
                 } else if (lookahead == '}') {
@@ -54,7 +60,9 @@ std::vector<Token> Lexer::scan() {
                         }
                         tokens.push_back(Token(t, word));
                 } else {
-                        throw "Syntax Error";
+                        throw Exception("Syntax error in line " + std::to_string(line_number));
                 }
         }
+
+        return tokens;
 }
