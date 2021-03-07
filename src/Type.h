@@ -31,7 +31,7 @@ enum class IdentifierType {
 };
 
 enum class TokenType {
-        LeftP, RightP, Identifier, TypeName
+        LeftP, RightP, Identifier, TypeName, End
 };
 
 #endif
