@@ -26,8 +26,12 @@
 #ifndef _TYPE_H_
 #define _TYPE_H_
 
-enum class Type {
+enum class IdentifierType {
         Bool, Int, Char
+};
+
+enum class TokenType {
+        LeftP, RightP, Identifier, TypeName
 };
 
 #endif
