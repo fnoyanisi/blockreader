@@ -6,6 +6,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(blockreader
         VERSION 1.0
         DESCRIPTION "Reads program blocks and generates symbo tables"
-        LANGUAGE CXX)
+        LANGUAGES CXX)
 
 add_subdirectory(src)
