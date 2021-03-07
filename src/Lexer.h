@@ -49,6 +49,7 @@ class Lexer {
         public:
                 Lexer(std::istream& i): is(i) {}
                 std::vector<Token> scan();
+                void write(std::ostream&) const;
 };
 
 #endif

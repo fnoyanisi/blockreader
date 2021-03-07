@@ -27,7 +27,8 @@
 #include "Lexer.h"
 #include "Exception.h"
 
-std::vector<Token> Lexer::scan() {
+std::vector<Token> 
+Lexer::scan() {
         unsigned line_number = 1;
 
         while((lookahead = is.get()) != std::char_traits<char>::eof()) {
@@ -39,9 +40,11 @@ std::vector<Token> Lexer::scan() {
                 }
         
                 if (lookahead == '{') {
-                        tokens.push_back(Token(TokenType::LeftP, "}"));
+                        tokens.push_back(Token(TokenType::LeftP, "{"));
                 } else if (lookahead == '}') {
                         tokens.push_back(Token(TokenType::RightP, "}"));
+                } else if (lookahead == ';') {
+                        tokens.push_back(Token(TokenType::Semicolon, ";"));
                 } else if (std::isalpha(lookahead)){
 
                         // get the whole word
@@ -66,4 +69,11 @@ std::vector<Token> Lexer::scan() {
 
         tokens.push_back(Token(TokenType::End,""));
         return tokens;
+}
+
+void 
+Lexer::write(std::ostream& os) const {
+        for(auto t: tokens)
+                if (t.type != TokenType::End)
+                        os << t.lexeme;
 }
