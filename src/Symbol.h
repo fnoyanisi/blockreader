@@ -32,8 +32,8 @@
 // more information about each symbol
 class Symbol {
         public:
-                Type type;
-                Symbol(Type t):type(t) {}
+                IdentifierType type;
+                Symbol(IdentifierType t):type(t) {}
 };
 
 #endif
