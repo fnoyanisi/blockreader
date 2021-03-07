@@ -30,7 +30,7 @@
 std::vector<Token> Lexer::scan() {
         unsigned line_number = 1;
 
-        while((lookahead = is.get())) {
+        while((lookahead = is.get()) != std::char_traits<char>::eof()) {
                 // skip whitespaces     
                 while (std::isspace(lookahead)) {
                         if (lookahead == '\n')
@@ -64,5 +64,6 @@ std::vector<Token> Lexer::scan() {
                 }
         }
 
+        tokens.push_back(Token(TokenType::End,""));
         return tokens;
 }
