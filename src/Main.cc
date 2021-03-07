@@ -33,13 +33,17 @@ using namespace std;
 int main(int argc, char **argv) {
         istringstream iss("{}");
         Lexer lexer(iss);
+        vector<Token> tokens;
 
         try {
-                lexer.scan();
+                tokens = lexer.scan();
         } catch (exception& e) {
                 cerr << e.what() << endl;
                 exit(EXIT_FAILURE);
         }
+
+        lexer.write(cout);
+        cout << endl;
 
         return 0;
 }
