@@ -24,10 +24,22 @@
  */
 
 #include <iostream>
+#include <sstream>
+
+#include "Lexer.h"
 
 using namespace std;
 
 int main(int argc, char **argv) {
-        
+        istringstream iss("{}");
+        Lexer lexer(iss);
+
+        try {
+                lexer.scan();
+        } catch (exception& e) {
+                cerr << e.what() << endl;
+                exit(EXIT_FAILURE);
+        }
+
         return 0;
 }
