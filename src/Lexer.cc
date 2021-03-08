@@ -31,27 +31,27 @@ std::vector<Token>
 Lexer::scan() {
         unsigned line_number = 1;
 
-        while((lookahead = is.get()) != std::char_traits<char>::eof()) {
+        while((ch = is.get()) != std::char_traits<char>::eof()) {
                 // skip whitespaces     
-                while (std::isspace(lookahead)) {
-                        if (lookahead == '\n')
+                while (std::isspace(ch)) {
+                        if (ch == '\n')
                                 line_number++;
                         continue;
                 }
         
-                if (lookahead == '{') {
+                if (ch == '{') {
                         tokens.push_back(Token(TokenType::LeftP, "{"));
-                } else if (lookahead == '}') {
+                } else if (ch == '}') {
                         tokens.push_back(Token(TokenType::RightP, "}"));
-                } else if (lookahead == ';') {
+                } else if (ch == ';') {
                         tokens.push_back(Token(TokenType::Semicolon, ";"));
-                } else if (std::isalpha(lookahead)){
+                } else if (std::isalpha(ch)){
 
                         // get the whole word
                         std::string word;
-                        while(!std::isspace(lookahead)) {
-                                word += lookahead;
-                                lookahead = is.get();
+                        while(!std::isspace(ch)) {
+                                word += ch;
+                                ch = is.get();
                         }
 
                         TokenType t;

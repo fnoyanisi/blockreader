@@ -42,7 +42,7 @@ class Token {
 
 class Lexer {
         private:
-                char lookahead, peek;
+                char ch;
                 std::istream& is;
                 std::vector<Token> tokens;
                 std::set<std::string> identifierTypes = {"Bool", "Int", "Char"};
