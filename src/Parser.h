@@ -26,4 +26,23 @@
 #ifndef _PARSER_H_
 #define _PARSER_H_
 
+#include <vector>
+
+#include "Exception.h"
+#include "Lexer.h"
+
+class Parser {
+        private:
+                std::vector<Token> tokens;
+                Token lookahead, peek;
+                void match(Token) const;
+                void block();
+                void decl();
+                void stmt();
+                void factor();
+        public:
+                Parser(std::vector<Token>& t): tokens(t) {}
+                void parse();
+};
+
 #endif
