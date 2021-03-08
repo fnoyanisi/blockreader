@@ -38,6 +38,7 @@ class Token {
                 TokenType type;
                 std::string lexeme;
                 Token(TokenType t, std::string s): type(t), lexeme(s) {}
+                Token():type(TokenType::End), lexeme("") {}
 };
 
 class Lexer {
