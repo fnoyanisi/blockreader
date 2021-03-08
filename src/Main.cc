@@ -27,6 +27,7 @@
 #include <sstream>
 
 #include "Lexer.h"
+#include "Parser.h"
 
 using namespace std;
 
