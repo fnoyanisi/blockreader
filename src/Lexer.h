@@ -32,14 +32,7 @@
 #include <set>
 
 #include "Type.h"
-
-class Token {
-        public:
-                TokenType type;
-                std::string lexeme;
-                Token(TokenType t, std::string s): type(t), lexeme(s) {}
-                Token():type(TokenType::End), lexeme("") {}
-};
+#include "Token.h"
 
 class Lexer {
         private:
