@@ -34,6 +34,8 @@ class Token {
                 TokenType type;
                 std::string lexeme;
                 
+                Token& operator=(const Token&);
+
                 Token(TokenType t, std::string s): type(t), lexeme(s) {}
                 Token():type(TokenType::End), lexeme("") {}
 };

@@ -28,3 +28,9 @@
 bool operator==(Token& a, Token& b){
         return (a.lexeme == b.lexeme) && (a.type == b.type); 
 }
+
+Token& Token::operator=(const Token& t) {
+        type = t.type;
+        lexeme = t.lexeme;
+        return *this;
+}
