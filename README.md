@@ -20,16 +20,32 @@ The input gives declaration of some symbols and demostrates their usage in (some
 
         block   --> '{' decls stmts '}'
 
-        decls   --> decls decl
-                 | E
+        decls   --> decls decl | E
 
         decl    --> type id ;
 
-        stmts   --> stmts stmt
-                 | E
+        stmts   --> stmts stmt | E
 
-        stmt    --> block
-                 | factor ;
+        stmt    --> block | factor ;
+
+        factor  --> id
+```
+
+The code uses a top-down parser, hence we need to make a couple of minor modifications to the grammar to eliminate left-recursion
+```
+        program --> block
+
+        block   --> '{' decls stmts '}'
+
+        decls   --> decl decls | E // changed
+
+        decl    --> type id ';'
+
+        type    --> 'Int' | 'Char' | 'Bool' // added
+
+        stmts   --> stmt stmts | E // changed
+
+        stmt    --> block | factor ';'
 
         factor  --> id
 ```
