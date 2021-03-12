@@ -36,6 +36,7 @@ Lexer::scan() {
                 while (std::isspace(ch)) {
                         if (ch == '\n')
                                 line_number++;
+                        ch = is.get();
                         continue;
                 }
         
