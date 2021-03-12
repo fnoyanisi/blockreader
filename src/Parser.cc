@@ -24,3 +24,56 @@
  */
 
 #include "Parser.h"
+#include "Token.h"
+#include "Exception.h"
+#include "Type.h"
+
+void Parser::match (TokenType t) {
+        if (lookahead.type == t) {
+                // advance the token
+                index++;
+                lookahead = tokens.at(index);
+        } else {
+                throw Exception("Parse error");
+        }
+}
+
+void Parser::block() {
+        match(TokenType::LeftP);
+        decls();
+        stmts();
+        match(TokenType::RightP);
+}
+
+void Parser::decls() {
+        if (lookahead.type == TokenType::TypeName){
+                decl();
+                decls();
+        }
+}
+
+void Parser::decl() {
+        match(TokenType::TypeName);
+        match(TokenType::Identifier);
+        match(TokenType::Semicolon);
+}
+
+void Parser::stmt() {
+        if (lookahead.type == TokenType::LeftP) {
+                block();
+                match(TokenType::Semicolon);
+        } else if(lookahead.type == TokenType::Identifier) {
+                match(TokenType::Identifier);
+                match(TokenType::Semicolon);
+        } else {
+                throw Exception("Parser error");
+        }
+}
+
+void Parser::stmts(){
+        TokenType t = lookahead.type;
+        if (t == TokenType::LeftP || t == TokenType::Identifier) {
+                stmt();
+                stmts();
+        }
+}

@@ -29,20 +29,27 @@
 #include <vector>
 
 #include "Exception.h"
-#include "Lexer.h"
+#include "Token.h"
 
 class Parser {
         private:
+                size_t index;
                 std::vector<Token> tokens;
                 Token lookahead, peek;
-                void match(Token) const;
+                void match(TokenType);
                 void block();
+                void decls();
                 void decl();
+                void type();
+                void stmts();
                 void stmt();
                 void factor();
         public:
-                Parser(std::vector<Token>& t): tokens(t) {}
-                void parse();
+                Parser(std::vector<Token>& t): tokens(t), index(0) {
+                        lookahead = (tokens.size()>0)? tokens.at(index) : Token();
+                        peek = Token();
+                }
+                void parse() { block(); };
 };
 
 #endif
