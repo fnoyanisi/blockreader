@@ -25,26 +25,47 @@
 
 #include <iostream>
 #include <sstream>
+#include <fstream>
+#include <memory>
 
 #include "Lexer.h"
 #include "Parser.h"
 
 using namespace std;
 
-int main(int argc, char **argv) {
-        istringstream iss("{}");
-        Lexer lexer(iss);
-        vector<Token> tokens;
+void usage() {
+        cout << "usage : blockreader [input_file_name]" << endl;
+}
 
-        try {
+int main(int argc, char **argv) {
+        unique_ptr<istream> is;
+
+        if (argc == 1) {
+                cout << "enter an expression : ";
+                string exp;
+                getline(cin, exp);
+                istringstream iss(exp);
+                is.reset(new istringstream(exp));
+        } else if (argc == 2) {
+                is.reset(new ifstream(argv[1]));
+        } else {
+                usage();
+                exit(EXIT_FAILURE);
+        }
+
+        
+
+        try {        
+                Lexer lexer(*is);
+                vector<Token> tokens;
                 tokens = lexer.scan();
+
+                Parser parser(tokens);
+                parser.parse();
         } catch (exception& e) {
                 cerr << e.what() << endl;
                 exit(EXIT_FAILURE);
         }
-
-        lexer.write(cout);
-        cout << endl;
 
         return 0;
 }
