@@ -53,8 +53,6 @@ int main(int argc, char **argv) {
                 exit(EXIT_FAILURE);
         }
 
-        
-
         try {        
                 Lexer lexer(*is);
                 vector<Token> tokens;
