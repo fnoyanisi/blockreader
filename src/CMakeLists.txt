@@ -6,7 +6,7 @@ set(BLOCKREADER_SRC
         Parser.cc Parser.h
         Lexer.cc Lexer.h
         Token.cc Token.h
-        Type.h
+        Type.cc Type.h
         Exception.h
         Main.cc)
 

@@ -34,7 +34,7 @@ void Parser::match (TokenType t) {
                 index++;
                 lookahead = tokens.at(index);
         } else {
-                throw Exception("Parse error");
+                throw Exception("Parse error: expecting " + t.str() + " but got " + lookahead.type.str() + ".");
         }
 }
 
@@ -66,7 +66,7 @@ void Parser::stmt() {
                 match(TokenType::Identifier);
                 match(TokenType::Semicolon);
         } else {
-                throw Exception("Parser error");
+                throw Exception("Parser error: expecting a statement but got " + lookahead.type.str());
         }
 }
 
