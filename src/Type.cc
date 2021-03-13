@@ -23,27 +23,23 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _TYPE_H_
-#define _TYPE_H_
+#include "Type.h"
 
-#include <iostream>
-
-enum class IdentifierType {
-        Bool, Int, Char
-};
-
-class TokenType {
-        public:
-                enum Type : uint8_t {
-                        LeftP, RightP, Semicolon, Identifier, TypeName, End
-                };
-                TokenType() = default;
-                constexpr TokenType(Type v): type(v) {}
-                constexpr bool operator==(TokenType t) const { return type == t.type; }
-                constexpr bool operator!=(TokenType t) const { return type != t.type; }
-                std::string str() const;
-        private:
-                Type type;
-};
-
-#endif
+std::string TokenType::str() const {
+        switch (type) {
+                case LeftP:     
+                        return "LeftP";
+                case RightP:    
+                        return "RightP";
+                case Semicolon: 
+                        return "Semicolon";
+                case Identifier:
+                        return "Identifier";
+                case TypeName:
+                        return "TpeName";
+                case End:
+                        return "End";
+                default:
+                        return "Unknown";
+        }
+}
