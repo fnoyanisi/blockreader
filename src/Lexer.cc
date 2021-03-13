@@ -37,6 +37,10 @@ Lexer::scan() {
                         if (ch == '\n')
                                 line_number++;
                         ch = is.get();
+                        if (ch == std::char_traits<char>::eof()) {
+                                tokens.push_back(Token(TokenType::End, ""));
+                                return tokens;
+                        }
                         continue;
                 }
         
@@ -49,10 +53,20 @@ Lexer::scan() {
                 } else if (std::isalpha(ch)){
 
                         // get the whole word
+                        // read till either a space char or a reserved char
+                        // is found
                         std::string word;
                         while(!std::isspace(ch)) {
+                                if (reserved.contains(ch)) {
+                                        is.unget();
+                                        break;
+                                }
                                 word += ch;
                                 ch = is.get();
+                                if (ch == std::char_traits<char>::eof()) {
+                                        tokens.push_back(Token(TokenType::End, ""));
+                                        return tokens;
+                                }
                         }
 
                         TokenType t;

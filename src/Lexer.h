@@ -40,6 +40,7 @@ class Lexer {
                 std::istream& is;
                 std::vector<Token> tokens;
                 std::set<std::string> identifierTypes = {"Bool", "Int", "Char"};
+                std::set<char> reserved = {';', '{', '}'};
         public:
                 Lexer(std::istream& i): is(i) {}
                 std::vector<Token> scan();
