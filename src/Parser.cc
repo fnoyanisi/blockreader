@@ -61,7 +61,6 @@ void Parser::decl() {
 void Parser::stmt() {
         if (lookahead.type == TokenType::LeftP) {
                 block();
-                match(TokenType::Semicolon);
         } else if(lookahead.type == TokenType::Identifier) {
                 match(TokenType::Identifier);
                 match(TokenType::Semicolon);
