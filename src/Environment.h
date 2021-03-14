@@ -27,7 +27,9 @@
 #define _ENVIRONMENT_H_
 
 #include <string>
+#include <optional>
 #include <unordered_map>
+
 #include "Symbol.h"
 #include "Type.h"
 
@@ -38,7 +40,7 @@ class Environment {
         public:
                 Environment(Environment* p): prev(p) {}
                 void put(std::string, Symbol);
-                Symbol get(std::string);
+                std::optional<Symbol> get(std::string) const;
 };
 
 #endif

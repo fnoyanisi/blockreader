@@ -23,4 +23,24 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <optional>
+
 #include "Environment.h"
+#include "Exception.h"
+
+void Environment::put(std::string i, Symbol s) {
+        if ((table.insert_or_assign(i ,s)).second == false)
+                throw Exception("Redefinition of symbol '" + i 
+                        + "' in line " + std::to_string(s.line));
+}
+
+std::optional<Symbol> Environment::get(std::string i) const {
+        const Environment *p = this;
+        while (p != nullptr) {
+                auto search = (p->table).find(i);
+                if (search != p->table.end())
+                        return std::optional<Symbol>{search->second};
+                p = p->prev;
+        }
+        return std::nullopt;
+}
