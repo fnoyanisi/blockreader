@@ -28,6 +28,7 @@
 
 #include <vector>
 
+#include "Environment.h"
 #include "Exception.h"
 #include "Token.h"
 
