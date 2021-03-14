@@ -30,8 +30,7 @@
 
 void Environment::put(std::string i, Symbol s) {
         if ((table.insert_or_assign(i ,s)).second == false)
-                throw Exception("Redefinition of symbol '" + i 
-                        + "' in line " + std::to_string(s.line));
+                throw Exception("Redefinition of symbol '" + i +"'");
 }
 
 std::optional<Symbol> Environment::get(std::string i) const {
