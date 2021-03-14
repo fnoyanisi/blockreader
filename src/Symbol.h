@@ -30,10 +30,13 @@
 
 // The Smbol class can be extended to accomodate
 // more information about each symbol
-class Symbol {
-        public:
-                IdentifierType type;
-                Symbol(IdentifierType t):type(t) {}
+
+ struct Symbol {
+        IdentifierType type;
+        unsigned blockid;
+        unsigned line;
+        Symbol(IdentifierType t, unsigned b, unsigned l):
+                type(t), blockid(b), line(l) {}
 };
 
 #endif
