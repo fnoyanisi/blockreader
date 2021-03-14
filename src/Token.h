@@ -31,13 +31,15 @@
 
 class Token {
         public:
+                IdentifierType idType;
                 TokenType type;
                 std::string lexeme;
                 
                 Token& operator=(const Token&);
 
-                Token(TokenType t, std::string s): type(t), lexeme(s) {}
-                Token():type(TokenType::End), lexeme("") {}
+                Token(TokenType t, std::string s): 
+                        type(t), lexeme(s) { idType = IdentifierType::Invalid; }
+                Token(): Token(TokenType::End,"") {}
 };
 
 bool operator==(Token&,Token&);

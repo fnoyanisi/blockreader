@@ -29,7 +29,7 @@
 #include <iostream>
 
 enum class IdentifierType {
-        Bool, Int, Char
+        Bool, Int, Char, Invalid
 };
 
 class TokenType {

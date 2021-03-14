@@ -69,14 +69,21 @@ Lexer::scan() {
                                 }
                         }
 
-                        TokenType t;
                         auto search = identifierTypes.find(word);
                         if (search != identifierTypes.end()) {
-                                t = TokenType::TypeName;
+                                Token token(TokenType::TypeName, word);
+                                IdentifierType idType;
+                                if (word == "Int") 
+                                        idType = IdentifierType::Int;
+                                else if (word == "Char")
+                                        idType = IdentifierType::Char;
+                                else 
+                                        idType = IdentifierType::Bool;
+                                token.idType = idType;
+                                tokens.push_back(token);
                         } else {
-                                t = TokenType::Identifier;
+                                tokens.push_back(Token(TokenType::Identifier, word));
                         }
-                        tokens.push_back(Token(t, word));
                 } else {
                         throw Exception("Syntax error in line " + std::to_string(line_number));
                 }

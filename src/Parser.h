@@ -26,6 +26,7 @@
 #ifndef _PARSER_H_
 #define _PARSER_H_
 
+#include <iostream>
 #include <vector>
 
 #include "Environment.h"
@@ -34,9 +35,11 @@
 
 class Parser {
         private:
+                Environment *top;
                 size_t index;
                 std::vector<Token> tokens;
-                Token lookahead, peek;
+                Token lookahead;
+                unsigned blockId;
                 void match(TokenType);
                 void block();
                 void decls();
@@ -46,11 +49,11 @@ class Parser {
                 void stmt();
                 void factor();
         public:
-                Parser(std::vector<Token>& t): tokens(t), index(0) {
+                Parser(std::vector<Token>& t): tokens(t), index(0), blockId(0) {
+                        top = nullptr;
                         lookahead = (tokens.size()>0)? tokens.at(index) : Token();
-                        peek = Token();
                 }
-                void parse() { block(); };
+                void parse() { block(); std::cout << std::endl; };
 };
 
 #endif

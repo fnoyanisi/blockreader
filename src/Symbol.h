@@ -34,9 +34,8 @@
  struct Symbol {
         IdentifierType type;
         unsigned blockid;
-        unsigned line;
-        Symbol(IdentifierType t, unsigned b, unsigned l):
-                type(t), blockid(b), line(l) {}
+        Symbol(IdentifierType t, unsigned b):
+                type(t), blockid(b) {}
 };
 
 #endif

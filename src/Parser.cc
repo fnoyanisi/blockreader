@@ -23,9 +23,13 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <iostream>
+#include <optional>
+
 #include "Parser.h"
 #include "Token.h"
 #include "Exception.h"
+#include "Symbol.h"
 #include "Type.h"
 
 void Parser::match (TokenType t) {
@@ -39,10 +43,22 @@ void Parser::match (TokenType t) {
 }
 
 void Parser::block() {
+        // symbol table related code
+        Environment *saved = top;
+        top = new Environment(top);
+        std::cout << "{ ";
+        blockId++;
+
+        // parser code
         match(TokenType::LeftP);
         decls();
         stmts();
         match(TokenType::RightP);
+
+        // symbol table related code
+        top = saved;
+        std::cout << "} ";
+        blockId--;
 }
 
 void Parser::decls() {
@@ -53,17 +69,48 @@ void Parser::decls() {
 }
 
 void Parser::decl() {
+        // the match() calls here are for the parser. The rest of the code
+        // aims to gather information for the symbol table entry
         match(TokenType::TypeName);
+        IdentifierType idType = tokens.at(index-1).idType;
+
         match(TokenType::Identifier);
+        std::string id = tokens.at(index-1).lexeme;
+
         match(TokenType::Semicolon);
+        top->put(id, Symbol(idType, blockId));
+}
+
+void Parser::factor() {
+        match(TokenType::Identifier);
+        
+        // symbol table code
+        std::string id = tokens.at(index-1).lexeme;
+        std::optional<Symbol> symbol = top->get(id);
+        std::cout << id + ":" ;
+        switch(symbol.value().type) {
+                case IdentifierType::Int:
+                        std::cout << "Int";
+                        break;
+                case IdentifierType::Char:
+                        std::cout << "Char";
+                        break;
+                case IdentifierType::Bool:
+                        std::cout << "Bool";
+                        break;
+                default:
+                        std::cout << "Invalid";
+                        break; 
+        }
 }
 
 void Parser::stmt() {
         if (lookahead.type == TokenType::LeftP) {
                 block();
         } else if(lookahead.type == TokenType::Identifier) {
-                match(TokenType::Identifier);
+                factor();
                 match(TokenType::Semicolon);
+                std::cout << "; ";
         } else {
                 throw Exception("Parser error: expecting a statement but got " + lookahead.type.str());
         }
