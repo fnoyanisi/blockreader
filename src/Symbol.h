@@ -29,13 +29,16 @@
 #include "Type.h"
 
 // The Smbol class can be extended to accomodate
-// more information about each symbol
-
+// more information about each symbol.
+// With its current form, the type of the identifier,
+// the block the identifier is defined in and a reference
+// counter are included
  struct Symbol {
         IdentifierType type;
         unsigned blockid;
+        unsigned refCount;
         Symbol(IdentifierType t, unsigned b):
-                type(t), blockid(b) {}
+                type(t), blockid(b) { refCount = 0; }
 };
 
 #endif

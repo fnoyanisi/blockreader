@@ -28,11 +28,16 @@
 #include "Environment.h"
 #include "Exception.h"
 
+// as given in the reference book, this method simply adds a new entry
+// into the symbol table
 void Environment::put(std::string i, Symbol s) {
         if ((table.insert_or_assign(i ,s)).second == false)
                 throw Exception("Redefinition of symbol '" + i +"'");
 }
 
+// there are several ways to implement a get() method. the implementation
+// here is not perfect, rather the first idea I came up with while 
+// writing the front-end
 std::optional<Symbol> Environment::get(std::string i) const {
         const Environment *p = this;
         while (p != nullptr) {

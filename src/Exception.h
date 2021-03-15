@@ -29,6 +29,8 @@
 #include <string>
 #include <exception>
 
+// a simple exception class for some flexbility and maybe
+// future expansions
 class Exception: public std::exception {
         private:
                 std::string msg;

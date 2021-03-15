@@ -33,6 +33,8 @@
 #include "Exception.h"
 #include "Token.h"
 
+// a class to implement a top-down recursive descent parser
+// for the grammar presented in the README file
 class Parser {
         private:
                 Environment *top;

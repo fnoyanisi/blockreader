@@ -29,6 +29,7 @@
 #include <string>
 #include "Type.h"
 
+// a class to implement each token
 class Token {
         public:
                 IdentifierType idType;

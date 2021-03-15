@@ -28,6 +28,9 @@
 
 #include <iostream>
 
+// some enumarations used by the front-end
+// IdentifierType could be rewritten as a class with some
+// he;lper methods to improve its functionality
 enum class IdentifierType {
         Bool, Int, Char, Invalid
 };

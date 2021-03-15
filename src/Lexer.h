@@ -34,6 +34,7 @@
 #include "Type.h"
 #include "Token.h"
 
+// a class to implement the lexer/tokenizer for the front-end
 class Lexer {
         private:
                 char ch;

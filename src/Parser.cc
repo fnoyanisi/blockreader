@@ -32,6 +32,10 @@
 #include "Symbol.h"
 #include "Type.h"
 
+// this is the implementation of the usual match() 
+// function found in the recursive descent parsers
+// it advances the token by incrementing an index
+// counter
 void Parser::match (TokenType t) {
         if (lookahead.type == t) {
                 // advance the token
@@ -42,6 +46,9 @@ void Parser::match (TokenType t) {
         }
 }
 
+// implementation of the production defining
+// a program block
+// block -> '{' decls stmst '}'
 void Parser::block() {
         // symbol table related code
         Environment *saved = top;
@@ -61,6 +68,10 @@ void Parser::block() {
         blockId--;
 }
 
+// implementation of decls
+// decls -> decl decls | E
+// checks whether the current token is an identifier
+// type name otherwise skips
 void Parser::decls() {
         if (lookahead.type == TokenType::TypeName){
                 decl();
@@ -68,6 +79,12 @@ void Parser::decls() {
         }
 }
 
+// decl -> type id ';'
+// the way the values are retrieved, i.e. using index-1
+// can be improved. It is assumed that if the parser is 
+// past a correspanding match() statement, then it is
+// safe the expect the previous token (remember, match() 
+// advanced the index) includes a certain type of token
 void Parser::decl() {
         // the match() calls here are for the parser. The rest of the code
         // aims to gather information for the symbol table entry
@@ -81,6 +98,9 @@ void Parser::decl() {
         top->put(id, Symbol(idType, blockId));
 }
 
+// factor -> id
+// the code for this method is mostly symbol table related
+// the only semantic action is to match the current token type
 void Parser::factor() {
         match(TokenType::Identifier);
         
@@ -97,6 +117,11 @@ void Parser::factor() {
                 exit(EXIT_FAILURE);
         }
 
+        // like we did with the TokenType class, the 
+        // IdentifierType enum class could be converted to a normal
+        // class which would then allow us to define a method such 
+        // as str() to return the string representation of each
+        // enumaration valiue
         switch(identifierType) {
                 case IdentifierType::Int:
                         std::cout << "Int";
@@ -113,6 +138,7 @@ void Parser::factor() {
         }
 }
 
+// stmt -> block | factor ';'
 void Parser::stmt() {
         if (lookahead.type == TokenType::LeftP) {
                 block();
@@ -125,6 +151,7 @@ void Parser::stmt() {
         }
 }
 
+// stmts -> stmt stmts | E
 void Parser::stmts(){
         TokenType t = lookahead.type;
         if (t == TokenType::LeftP || t == TokenType::Identifier) {

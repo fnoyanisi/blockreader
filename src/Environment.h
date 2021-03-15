@@ -33,6 +33,11 @@
 #include "Symbol.h"
 #include "Type.h"
 
+// an enviroment to implement symbol tables
+// each environment keeps its respective symbold table in a 
+// std::unordered_map and environments form a tree hierarchy
+// for nested scopes
+// Could Environement* be replaced with smart pointers?
 class Environment {
         private:
                 std::unordered_map<std::string, Symbol> table;

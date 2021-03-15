@@ -27,8 +27,7 @@
 #include "Lexer.h"
 #include "Exception.h"
 
-std::vector<Token> 
-Lexer::scan() {
+std::vector<Token>  Lexer::scan() {
         unsigned line_number = 1;
 
         while((ch = is.get()) != std::char_traits<char>::eof()) {
@@ -69,6 +68,10 @@ Lexer::scan() {
                                 }
                         }
 
+                        // we want to distinguish reserved words from
+                        // identifier names. In its current form, the
+                        // language does not enforce any rules as far
+                        // as the identifier names are concerned
                         auto search = identifierTypes.find(word);
                         if (search != identifierTypes.end()) {
                                 Token token(TokenType::TypeName, word);
@@ -93,8 +96,7 @@ Lexer::scan() {
         return tokens;
 }
 
-void 
-Lexer::write(std::ostream& os) const {
+void Lexer::write(std::ostream& os) const {
         for(auto t: tokens)
                 if (t.type != TokenType::End)
                         os << t.lexeme;
