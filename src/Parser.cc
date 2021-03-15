@@ -88,7 +88,16 @@ void Parser::factor() {
         std::string id = tokens.at(index-1).lexeme;
         std::optional<Symbol> symbol = top->get(id);
         std::cout << id + ":" ;
-        switch(symbol.value().type) {
+        
+        IdentifierType identifierType;
+        try {
+                identifierType = symbol.value().type;
+        } catch (std::bad_optional_access e) {
+                std::cout << "Undeclared identifier" << std::endl;
+                exit(EXIT_FAILURE);
+        }
+
+        switch(identifierType) {
                 case IdentifierType::Int:
                         std::cout << "Int";
                         break;
