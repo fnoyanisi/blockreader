@@ -12,7 +12,7 @@ is converted into the output below
 
 The input comprises declarations of some identifiers and demostrates their usage in (sometimes nested) program blocks. The output gives the type of particular identifier within each program block.
 
-The code can be improved in several ways, such as adding more information into the symbol table or with more explanatory error messages or using more simple but efficient constructs.
+The code can be improved in several ways, such as adding more information into the symbol table or with more explanatory error messages or using more simple but more efficient constructs.
 
 This code is a simple implementation of the program snippet given the Chapter2 of Compilers Principles Techniques and Tools, 2nd Edition (aka the Dragon Book).
 
