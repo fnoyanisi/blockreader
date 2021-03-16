@@ -10,7 +10,7 @@ is converted into the output below
 {{ x:Int; y:Bool; } x:Int; y:Char; }
 ```
 
-The input comprises of the declaration of some identifiers and demostrates their usage in (sometimes nested) program blocks. The output gives the type of particular identifier within each program block.
+The input comprises declarations of some identifiers and demostrates their usage in (sometimes nested) program blocks. The output gives the type of particular identifier within each program block.
 
 The code can be improved in several ways, such as adding more information into the symbol table or with more explanatory error messages or using more simple but efficient constructs.
 
